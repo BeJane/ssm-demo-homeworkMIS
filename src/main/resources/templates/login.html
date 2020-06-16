@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录-作业管理系统</title>
+    <script src="./css/demo.css"></script>
+
+</head>
+<body align="center" >
+<div class="dowebok">
+    <div class="logo">
+        欢迎使用学生作业管理系统
+    </div>
+<br>
+    <form action="/user/verify" method="POST">
+
+        <p>
+            <label>学号/工号</label>
+            <input type="text" name="account" />
+        </p>
+        <p>
+            <label>密码</label>
+            <input type="text" name="password" />
+        </p>
+        <p>
+            <input type="checkbox" name="type" value="0" />登录为学生
+            <input type="checkbox" name="type" value="1" />登录为老师
+
+        </p>
+        <p class="submit">
+            <input type="submit" value="登录" />
+        </p>
+    </form>
+
+    <div class="reg-bar">
+        <a href="/user/register">没有账号？前往注册</a>
+    </div>
+</div>
+
+</body>
+</html>

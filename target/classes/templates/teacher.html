@@ -1,0 +1,69 @@
+
+
+<html  xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>作业管理系统(教师版）</title>
+
+      <style type="text/css">
+          table {
+              border: 1px solid black;
+              text-align: center;
+              border-collapse: collapse;
+          }
+          table thead th {
+              border: 1px solid black;
+          }
+          table tbody td {
+              border: 1px solid black;
+          }
+      </style>
+  </head>
+  <body align="center" >
+作业管理系统(教师版)
+&nbsp;&nbsp;
+<a href="asStudent">切换学生版</a>
+<br>
+<br>
+
+<a href="addHomework">添加作业</a>
+&nbsp;
+<a href="student">添加学生</a>
+<br>
+<br>
+<table align="center" width="960" border="1"
+       bgcolor="black"  cellpadding="1" cellspacing="1">
+    <tr align = "center" bgcolor="#7fffd4" height="50">
+
+        <td>作业编号</td>
+        <td>作业标题</td>
+        <td>作业内容</td>
+        <td>创建时间</td>
+        <td>操作</td>
+    </tr>
+
+    <tbody>
+    <tr th:each="entries:${list}" th:style="'background-color:'+'#F2F2F2'" >
+        <td th:text="${entries['id']}"></td>
+        <td th:text="${entries['title']}"></td>
+        <td th:text="${entries['content']}"></td>
+
+        <td th:text="${entries['createTime']}"></td>
+        <!-- 写法一：
+        <td th:text="${entries['scourse']['cname']}"></td>
+        <td th:text="${entries['scourse']['cscore']}"></td>-->
+        <!-- 写法二：
+        <td th:text="*{entries['scourse']['cname']}"></td>
+        <td th:text="*{entries['scourse']['cscore']}"></td>-->
+        <!-- 写法三：-->
+
+    </tr>
+    </tbody>
+<!--
+    ————————————————
+    版权声明：本文为CSDN博主「罗小树」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+    原文链接：https://blog.csdn.net/u010999809/article/details/80726248
+-->
+</table>
+
+  </body>
+</html>
