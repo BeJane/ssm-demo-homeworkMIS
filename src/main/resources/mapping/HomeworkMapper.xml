@@ -8,12 +8,13 @@
     <result column="techerid" property="techerid" jdbcType="CHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="teacher_name" property="teacherName" jdbcType="CHAR" />
   </resultMap>
   <resultMap id="ResultMapWithBLOBs" type="com.winter.model.Homework" extends="BaseResultMap" >
     <result column="content" property="content" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, title, score, techerid, create_time, update_time
+    id, title, score, techerid, create_time, update_time, teacher_name
   </sql>
   <sql id="Blob_Column_List" >
     content
@@ -26,13 +27,6 @@
     from s_homework
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
-    select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from s_homework
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from s_homework
     where id = #{id,jdbcType=BIGINT}
@@ -40,10 +34,10 @@
   <insert id="insert" parameterType="com.winter.model.Homework" >
     insert into s_homework (id, title, score, 
       techerid, create_time, update_time, 
-      content)
+      teacher_name, content)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
       #{techerid,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{teacherName,jdbcType=CHAR}, #{content,jdbcType=LONGVARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.winter.model.Homework" >
     insert into s_homework
@@ -65,6 +59,9 @@
       </if>
       <if test="updateTime != null" >
         update_time,
+      </if>
+      <if test="teacherName != null" >
+        teacher_name,
       </if>
       <if test="content != null" >
         content,
@@ -89,6 +86,9 @@
       <if test="updateTime != null" >
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="teacherName != null" >
+        #{teacherName,jdbcType=CHAR},
+      </if>
       <if test="content != null" >
         #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -112,6 +112,9 @@
       <if test="updateTime != null" >
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="teacherName != null" >
+        teacher_name = #{teacherName,jdbcType=CHAR},
+      </if>
       <if test="content != null" >
         content = #{content,jdbcType=LONGVARCHAR},
       </if>
@@ -125,6 +128,7 @@
       techerid = #{techerid,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
+      teacher_name = #{teacherName,jdbcType=CHAR},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -134,7 +138,35 @@
       score = #{score,jdbcType=INTEGER},
       techerid = #{techerid,jdbcType=CHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP}
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      teacher_name = #{teacherName,jdbcType=CHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectAll" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from s_homework
+      order by create_time DESC
+  </select>
+  <select id="selectByTeacherId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from s_homework
+    where techerid = #{techerid,jdbcType=CHAR}
+    order by create_time DESC
+  </select>
+    <select id="selectByTeacherName" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from s_homework
+        where teacher_name = #{teacherName,jdbcType=CHAR}
+        order by create_time DESC
+    </select>
 </mapper>

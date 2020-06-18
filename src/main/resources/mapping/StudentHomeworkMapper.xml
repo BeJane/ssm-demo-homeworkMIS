@@ -30,12 +30,24 @@
   </select>
 
   <select id="selectByHomeworkId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  select
+  <include refid="Base_Column_List" />
+  ,
+  <include refid="Blob_Column_List" />
+  from s_student_homework
+  where homework_id = #{homeworkId,jdbcType=BIGINT}
+</select>
+
+  <select id="selectByDoublekey" resultMap="ResultMapWithBLOBs" parameterType="com.winter.model.StudentHomework" >
     select
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
     from s_student_homework
-    where homework_id = #{id,jdbcType=BIGINT}
+    where
+
+      student_id = #{studentId,jdbcType=CHAR} and
+      homework_id = #{homeworkId,jdbcType=BIGINT}
   </select>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >

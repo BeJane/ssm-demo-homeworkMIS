@@ -15,6 +15,8 @@ public class Homework {
 
     private Date updateTime;
 
+    private String teacherName;
+
     private String content;
 
     public Long getId() {
@@ -63,6 +65,14 @@ public class Homework {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getTeacherName() {
+        return teacherName;
+    }
+
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName == null ? null : teacherName.trim();
     }
 
     public String getContent() {

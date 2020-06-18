@@ -19,13 +19,12 @@ public class HomeworkServiceImpl implements HomeworkService {
     /**
      * 老师发布作业
      *
-     * @param title
-     * @param content
+     * @param homework
      * @return
      */
     @Override
-    public String addHomework(String title, String content) {
-        return null;
+    public int addHomework(Homework homework) {
+        return homeworkMapper.insert(homework);
     }
 
     /**
@@ -36,5 +35,21 @@ public class HomeworkServiceImpl implements HomeworkService {
     @Override
     public List<Homework> selectAll() {
         return homeworkMapper.selectAll();
+    }
+
+    @Override
+    public List<Homework> selectByTeacherId(String teacherId) {
+
+        return homeworkMapper.selectByTeacherId(teacherId);
+    }
+
+    @Override
+    public List<Homework> selectByTeacherName(String teacherName) {
+        return homeworkMapper.selectByTeacherName(teacherName);
+    }
+
+    @Override
+    public Homework selectByPK(Long id) {
+        return homeworkMapper.selectByPrimaryKey(id);
     }
 }

@@ -1,0 +1,39 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>作业管理系统(学生版）</title>
+
+    <script src="./css/demo.css"></script>
+</head>
+<body align="center" >
+作业管理系统(学生版)
+&nbsp;&nbsp;&nbsp;
+<a  style="float: left" href="/user/login">注销</a>
+<h2>步步咏凉天作业管理系统</h2>
+<p  th:text="'欢迎，' + ${name}+'同学'" ></p>
+
+<br>
+<br>
+
+<form action="updateStudentHomework" align="center" method="POST">
+    <p class="homework_id">
+        <input type="hidden" name="id"  value="" th:value="*{studentHomework['id']}">
+    </p>
+    <p class="title">
+        <label>作业题目</label>
+        <input type="text" name="homeworkTitle" value="" th:value="*{studentHomework['homeworkTitle']}">
+    </p>
+    <p class="content">
+        <label>作业内容</label>
+        <textarea name="homeworkContent" value="" th:value="*{studentHomework['homeworkContent']}"></textarea>
+    </p>
+    <p class="submit">
+        <input type="submit" value="提交" />
+    </p>
+</form>
+</div>
+
+
+<br> <br/>
+
+</body>
+</html>

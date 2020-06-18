@@ -13,15 +13,16 @@ public interface HomeworkService {
 
     /**
      * 老师发布作业
-     * @param title
-     * @param content
+     * @param homework
      * @return
      */
-    String addHomework(String title, String content);
+    int addHomework(Homework homework);
     /**
      *  This is the method to be used to list down all homework
      * @return
      */
     List<Homework> selectAll();
-
+    List<Homework> selectByTeacherId(String teacherId);
+    List<Homework> selectByTeacherName(String teacherName);
+    Homework selectByPK(Long id);
 }

@@ -1,6 +1,7 @@
 package com.winter.service;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.servlet.ModelAndView;
+import com.winter.model.StudentHomework;
+
+import java.util.List;
 
 
 /**
@@ -9,38 +10,38 @@ import org.springframework.web.servlet.ModelAndView;
  */
 public interface StudentHomeworkService {
 
-    /**
-     * @param jdbcTemplate
-     */
-    void setJdbcTemplate(JdbcTemplate jdbcTemplate);
-    /**
-     * This is the method to be used to set the ModelAndView
-     * @return
-     */
-    ModelAndView getModelAndView();
 
     /**
      * 学生提交作业
-     * @param homeworkId
-     * @param studentId
-     * @param title
-     * @param content
+     * @param studentHomework
      * @return
      */
-    String addStudentHomework(
-            Long homeworkId, Long studentId, String title, String content);
+    int addStudentHomework(StudentHomework studentHomework);
+
+    /**
+     * @return
+     */
+    int updateStudentHomework(StudentHomework studentHomework);
     /**
      *  This is the method to be used to list down all
      *  students' homework
+     * @param homeworkId
      * @return
      */
-    ModelAndView select(Long homeworkId);
+    List<StudentHomework> selectByHomeworkId(Long homeworkId);
 
     /**
      * This is the method to be used to search the student's homework
-     * @param homeworkId
-     * @param studentId
+     *
+     * @param id
      * @return
      */
-    ModelAndView select(Long homeworkId, Long studentId);
+    StudentHomework selectByP(Long id);
+
+    /**
+     * 目前是通过studentid,homeworkid查询
+     * @param studentHomework
+     * @return
+     */
+    StudentHomework selectByDoublekey(StudentHomework studentHomework);
 }

@@ -11,8 +11,12 @@ public interface HomeworkMapper {
 
     int insertSelective(Homework record);
 
-    Homework selectByPrimaryKey(Long id);
     List<Homework> selectAll();
+    List<Homework> selectByTeacherId(String teacherId);
+
+    List<Homework> selectByTeacherName(String teacherName);
+    Homework selectByPrimaryKey(Long id);
+
     int updateByPrimaryKeySelective(Homework record);
 
     int updateByPrimaryKeyWithBLOBs(Homework record);

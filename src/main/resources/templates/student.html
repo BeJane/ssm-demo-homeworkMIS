@@ -1,39 +1,76 @@
 
-<html>
-  <head>
+
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
     <title>作业管理系统(学生版）</title>
-  </head>
-  <body align="center" >
-作业管理系统(学生版)
-&nbsp;
-<a href="teacher">切换教师版</a>
-<br>
-<br>
-作业列表
-<br>
-<br>
-    <table align="center" width="960" border="1"
-           bgcolor="black"  cellpadding="1" cellspacing="1">
-        <tr align = "center" bgcolor="#7fffd4" height="50">
 
-            <td>作业编号</td>
-            <td>作业标题</td>
-            <td>作业内容</td>
-            <td>创建时间</td>
-            <td>操作</td>
-        </tr>
+    <style type="text/css">
+        table {
+            border: 1px solid black;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        table thead th {
+            border: 1px solid black;
+        }
+        table tbody td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body align="center" >
+<a  style="float: left" href="/user/login">注销</a>
+<h2>步步咏凉天作业管理系统</h2>
+<p  th:text="'欢迎，' + ${name}+'同学'" ></p>
 
+<br>
+<h3>作业列表</h3>
 
-        <c:forEach var="entry" items="${list}" >
+<form action="searchHomework" align="center" method="POST">
 
-            <tr align="center" bgcolor="white" height = "30">
-                <td>${entry.get(id)}</td>
-                <td>${entry.get(title)}</td>
-                <td>${entry.get(content)}</td>
-                <td>${entry.get(time)}</td>
-                <td><a href="addStudentHomework?id=${entry.get(id)}">提交</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-  </body>
+    <p class="s_id">
+        <label>教师姓名</label>
+        <input type="text" name="teacherName">
+    </p>
+    <p class="submit">
+        <input type="submit" value="查询" />
+    </p>
+</form>
+<br>
+<table align="center" width="960" border="1"
+       bgcolor="black"  cellpadding="1" cellspacing="1">
+    <tr align = "center" bgcolor="#7fffd4" height="50">
+
+        <td>作业编号</td>
+        <td>作业标题</td>
+        <td>作业内容</td>
+        <td>满分</td>
+        <td>发布教师</td>
+        <td>创建时间</td>
+        <td>操作</td>
+    </tr>
+
+    <tbody>
+    <tr th:each="entries:${list}" th:style="'background-color:'+'#F2F2F2'" >
+        <td th:text="${entries['id']}"></td>
+        <td th:text="${entries['title']}"></td>
+        <td th:text="${entries['content']}"></td>
+
+        <td th:text="${entries['score']}"></td>
+
+        <td th:text="${entries['teacherName']}"></td>
+        <td th:text="${#dates.format(entries['createTime'], 'yyyy-MM-dd HH:mm')}"></td>
+        <td><a th:href="@{'selectmh?homeworkId='+${entries['id']}}">选择</a>
+        </td>
+
+    </tr>
+    </tbody>
+    <!--
+        ————————————————
+        版权声明：本文为CSDN博主「罗小树」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+        原文链接：https://blog.csdn.net/u010999809/article/details/80726248
+    -->
+</table>
+
+</body>
 </html>

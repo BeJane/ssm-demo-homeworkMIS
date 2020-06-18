@@ -11,8 +11,6 @@ public interface UserMapper {
 
     User selectByPrimaryKey(String account);
 
-    User selectByThreeKey(String account,String password,int type);
-
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);

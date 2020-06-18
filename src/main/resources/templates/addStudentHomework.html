@@ -1,0 +1,99 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>提交作业-步步咏凉天作业管理系统</title>
+
+    <script src="./css/demo.css"></script>
+</head>
+<body align="center" >
+<a  style="float: left" href="/user/login">注销</a>
+<h2>步步咏凉天作业管理系统</h2>
+<p  th:text="'欢迎，' + ${name}+'同学'" ></p>
+
+<br>
+<br>
+<h3>作业详情</h3>
+<br>
+<table align="center" width="960" border="1"
+       bgcolor="black"  cellpadding="1" cellspacing="1">
+
+
+    <tr align = "center" bgcolor="#7fffd4" height="50">
+        <th>作业题目</th>
+        <td th:text="${homework['title']}"></td>
+    <tr  align = "center" bgcolor="#7fffd4" height="50">
+        <th>作业要求</th>
+        <td th:text="${homework['content']}"></td>
+    </tr>
+    <tr  align = "center" bgcolor="#7fffd4" height="50">
+        <th>作业分值</th>
+        <td th:text="${homework['score']}"></td>
+    </tr>
+    <tr  align = "center" bgcolor="#7fffd4" height="50">
+        <th>发布时间</th>
+        <td th:text="${#dates.format(homework['createTime'], 'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+
+
+</table>
+<div th:if="${#lists.isEmpty(list)}">
+
+<form action="addStudentHomework" align="left" method="POST">
+    <p class="homework_id">
+        <input type="hidden" name="homeworkId"  value="" th:value="*{homeworkId}">
+    </p>
+    <p class="s_id">
+        <input type="hidden" name="studentId"  value="" th:value="*{studentId}">
+    </p>
+    <p class="title">
+        <label>作业题目</label>
+        <input type="text" name="homeworkTitle">
+    </p>
+    <p class="content">
+        <label>作业内容</label>
+        <textarea name="homeworkContent"></textarea>
+    </p>
+    <p class="submit">
+        <input type="submit" value="提交" />
+    </p>
+</form>
+</div>
+
+
+<br> <br/>
+
+<div th:if="${not #lists.isEmpty(list)}">
+    <br><br>
+    <h3>我的作业</h3>
+<table align="center" width="960" border="1"
+       bgcolor="black" cellpadding="1" cellspacing="1">
+    <tr align="center" bgcolor="#7fffd4" height="50">
+        <td>学生学号</td>
+        <td>作业标题</td>
+        <td>作业内容</td>
+
+        <td>创建时间</td>
+        <td>修改时间</td>
+        <td>成绩</td>
+        <td>评语</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="entries:${list}" th:style="'background-color:'+'#F2F2F2'" >
+        <td th:text="${entries['studentId']}"></td>
+
+        <td th:text="${entries['homeworkTitle']}"></td>
+        <td th:text="${entries['homeworkContent']}"></td>
+
+        <td th:text="${#dates.format(entries['createTime'], 'yyyy-MM-dd HH:mm')}"></td>
+
+        <td th:text="${#dates.format(entries['updateTime'], 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${entries['score']}"></td>
+        <td th:text="${entries['comment']}"></td>
+
+        <td><a th:href="@{'modify?id='+${entries['id']}}" >修改</a>
+        </td>
+
+    </tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>作业批改-步步咏凉天</title>
+
+    <script src="./css/demo.css"></script>
+</head>
+<body align="center" >
+<a  style="float: left" href="/user/login">注销</a>
+<h2>步步咏凉天作业管理系统</h2>
+<p  th:text="'辛苦啦！' + ${name}+'老师'" ></p>
+
+<br>
+<br>
+
+
+<h3>作业详情</h3>
+<br>
+<table align="center" width="960" border="1"
+       bgcolor="black"  cellpadding="1" cellspacing="1">
+    <tr align = "center" bgcolor="#7fffd4" height="50">
+
+        <th>学生学号</th>
+        <td th:text="${studentHomework['studentId']}"></td>
+    </tr>
+    <tr align = "center" bgcolor="#7fffd4" height="50">
+        <th>作业标题</th>
+        <td th:text="${studentHomework['homeworkTitle']}"></td>
+        <tr  align = "center" bgcolor="#7fffd4" height="50">
+        <th>作业内容</th>
+        <td th:text="${studentHomework['homeworkContent']}"></td>
+</tr>
+    <tr  align = "center" bgcolor="#7fffd4" height="50">
+        <th>创建时间</th>
+        <td th:text="${#dates.format(studentHomework['createTime'], 'yyyy-MM-dd HH:mm')}"></td>
+    </tr>
+    <tr  align = "center" bgcolor="#7fffd4" height="50">
+        <th>修改时间</th>
+        <td th:text="${#dates.format(studentHomework['updateTime'], 'yyyy-MM-dd HH:mm')}"></td>
+
+    </tr>
+
+
+    <!--
+        ————————————————
+        版权声明：本文为CSDN博主「罗小树」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+        原文链接：https://blog.csdn.net/u010999809/article/details/80726248
+    -->
+</table>
+
+<form action="addreview" align="center" method="POST">
+    <p class="id">
+        <input type="hidden" name="id"  value="" th:value="*{studentHomework['id']}">
+    </p>
+
+    <p class="homework_id">
+        <input type="hidden" name="homeworkId"  value="" th:value="*{studentHomework['homeworkId']}">
+    </p>
+    <p class="score">
+        <label>评分</label>
+        <input type="text" name="score" value="" th:value="*{studentHomework['score']}">
+    </p>
+    <p class="comment">
+        <label>点评</label>
+        <input type="text" name="comment" value="" th:value="*{studentHomework['comment']}">
+    </p>
+
+    <p class="submit">
+        <input type="submit" value="提交" />
+    </p>
+</form>
+
+</body>
+</html>

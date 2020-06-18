@@ -1,0 +1,64 @@
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>作业管理系统(教师版）</title>
+
+    <script src="./css/demo.css"></script>
+</head>
+<body align="center" >
+<a  style="float: left" href="/user/login">注销</a>
+<h2>步步咏凉天作业管理系统</h2>
+<p  th:text="'欢迎，' + ${name}+'老师'" ></p>
+
+<br>
+<h3>学生作业列表</h3>
+<br>
+<form action="searchStudentHomework" align="center" method="POST">
+    <p class="homework_id">
+        <input type="hidden" name="homeworkId"  value="" th:value="*{homeworkId}">
+    </p>
+    <p class="s_id">
+        <label>学生学号</label>
+        <input type="text" name="studentId">
+    </p>
+    <p class="submit">
+        <input type="submit" value="查询" />
+    </p>
+</form>
+
+
+<br> <br/>
+<table align="center" width="960" border="1"
+       bgcolor="black" cellpadding="1" cellspacing="1">
+    <tr align="center" bgcolor="#7fffd4" height="50">
+        <td>ID</td>
+        <td>学生学号</td>
+        <td>作业编号</td>
+        <td>作业标题</td>
+        <td>作业内容</td>
+        <td>创建时间</td>
+        <td>修改时间</td>
+        <td>成绩</td>
+        <td>评语</td>
+        <td>操作</td>
+    </tr>
+    <tr th:each="entries:${list}" th:style="'background-color:'+'#F2F2F2'" >
+        <td th:text="${entries['id']}"></td>
+        <td th:text="${entries['studentId']}"></td>
+
+        <td th:text="${entries['homeworkId']}"></td>
+        <td th:text="${entries['homeworkTitle']}"></td>
+        <td th:text="${entries['homeworkContent']}"></td>
+        <td th:text="${#dates.format(entries['createTime'], 'yyyy-MM-dd HH:mm')}"></td>
+
+        <td th:text="${#dates.format(entries['updateTime'], 'yyyy-MM-dd HH:mm')}"></td>
+
+        <td th:text="${entries['score']}"></td>
+        <td th:text="${entries['comment']}"></td>
+
+        <td><a th:href="@{'review?id='+${entries['id']}}" >查看</a>
+        </td>
+
+    </tr>
+</table>
+</body>
+</html>

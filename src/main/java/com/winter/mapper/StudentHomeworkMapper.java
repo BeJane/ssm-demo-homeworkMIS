@@ -14,6 +14,9 @@ public interface StudentHomeworkMapper {
     StudentHomework selectByPrimaryKey(Long id);
     List<StudentHomework> selectByHomeworkId(Long hid);
 
+    // 通过studentid,homeworkid查询
+    StudentHomework selectByDoublekey(StudentHomework studentHomework);
+
     int updateByPrimaryKeySelective(StudentHomework record);
 
     int updateByPrimaryKeyWithBLOBs(StudentHomework record);

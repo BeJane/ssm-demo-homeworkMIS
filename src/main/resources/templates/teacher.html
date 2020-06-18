@@ -19,36 +19,55 @@
       </style>
   </head>
   <body align="center" >
-作业管理系统(教师版)
-&nbsp;&nbsp;
-<a href="asStudent">切换学生版</a>
-<br>
-<br>
+  <a  style="float: left" href="/user/login">注销</a>
+  <h2>步步咏凉天作业管理系统</h2>
+  <p  th:text="'欢迎，' + ${name}+'老师'" ></p>
 
-<a href="addHomework">添加作业</a>
-&nbsp;
-<a href="student">添加学生</a>
+  <br>
+
+<form action="addHomework" align="left" method="POST">
+
+    <p class="title">
+        <label>作业题目</label>
+        <input type="text" name="title">
+    </p>
+    <p class="content">
+        <label>作业内容</label>
+        <textarea name="content"></textarea>
+    </p>
+
+    <p class="score">
+        <label>作业分值</label>
+        <textarea name="score"></textarea>
+    </p>
+
+    <p class="submit">
+        <input type="submit" value="发布作业" />
+    </p>
+</form>
+
+
 <br>
-<br>
+  <h3>已发布的作业</h3>
 <table align="center" width="960" border="1"
        bgcolor="black"  cellpadding="1" cellspacing="1">
     <tr align = "center" bgcolor="#7fffd4" height="50">
 
-        <td>作业编号</td>
         <td>作业标题</td>
         <td>作业内容</td>
+        <td>作业分值</td>
         <td>创建时间</td>
         <td>操作</td>
     </tr>
 
     <tbody>
     <tr th:each="entries:${list}" th:style="'background-color:'+'#F2F2F2'" >
-        <td th:text="${entries['id']}"></td>
         <td th:text="${entries['title']}"></td>
         <td th:text="${entries['content']}"></td>
+        <td th:text="${entries['score']}"></td>
 
-        <td th:text="${entries['createTime']}"></td>
-        <td><a href="user/selectsh?hid={entries['id']}">查看</a>
+        <td th:text="${#dates.format(entries['createTime'], 'yyyy-MM-dd HH:mm')}"></td>
+        <td><a th:href="@{'selectsh?homeworkId='+${entries['id']}}" >查看</a>
         </td>
 
     </tr>

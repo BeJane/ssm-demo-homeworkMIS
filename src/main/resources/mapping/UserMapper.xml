@@ -16,15 +16,6 @@
     from s_user
     where account = #{account,jdbcType=CHAR}
   </select>
-
-  <select id="selectByThreeKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select
-    <include refid="Base_Column_List" />
-    from s_user
-    where account = #{account,jdbcType=CHAR},
-    password = #{password,jdbcType=CHAR},
-    type = #{type,jdbcType=INTEGER  },
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from s_user
     where account = #{account,jdbcType=CHAR}
