@@ -9,6 +9,7 @@
         <version>2.3.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>war</packaging>
     <groupId>com.example</groupId>
     <artifactId>ssm_demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -16,7 +17,7 @@
     <description>Demo project for Spring Boot</description>
 
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
 
         <druid.version>1.0.23</druid.version>
 
@@ -62,14 +63,41 @@
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
+
+        <defaultGoal>compile</defaultGoal>
+
+        <finalName>17301169-Homework</finalName>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+
+                </configuration>
+
             </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin </artifactId>
+                <configuration>
+
+                    <fork>true</fork>
+                    <mainClass>com.SsmDemoApplication</mainClass>
+                </configuration>
+
+            </plugin>
+
             <!-- mybatis generator 自动生成代码插件 -->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
