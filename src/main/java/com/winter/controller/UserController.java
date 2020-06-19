@@ -15,10 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-/**
- * Created by Administrator on 2017/8/16.
- */
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
